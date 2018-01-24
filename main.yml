@@ -1,0 +1,57 @@
+---
+# This playbook updates all app server nodes in batches of 10.
+# The role for updateing the application deployed to the nginx app server 
+# will be 'bunqapp'
+
+- hosts: appservers
+  serial: 10
+  any_errors_fatal: True
+
+  # First take node down from haproxy instance(s)
+  pre_tasks: 
+  - name: disable node 
+    haproxy: 
+      host: {{ inventory_hostname }}
+      state: disabled
+      backend: bunqlb 
+      socket: /var/lib/haproxy/stats'
+    delegate_to: "{{ item }}"
+    with_items: "{{ groups['haproxy'] }}"
+
+  # Could be abstracted with a role 
+  # Stop nginx on node, pull version from git, restart nginx
+  tasks:
+  - name: stop nginx
+    service: name=nginx state=stopped
+
+  - name: clone git repo
+    git: >
+      repo=http://internal.com/bunqapp/bunqapp.git
+      dest=/var/www/bunqapp
+      version: {{ pullversion }}
+      accept_hostkey=yes
+    sudo: yes
+    sudo_user: www
+
+  - name: start nginx
+    service: name=nginx state=started
+
+  post_tasks:
+  - name: wait on server start
+    wait_for: 
+      host: {{ inventory_hostname }}
+      port: 80 
+      state: started
+      timeout: 60'
+
+  - name: enable node 
+    haproxy: 
+      host: {{ inventory_hostname }}
+      state: enabled
+      backend: bunqlb 
+      socket: /var/lib/haproxy/stats'
+    delegate_to: "{{ item }}"
+    with_items: "{{ groups['haproxy'] }}"
+
+
+
