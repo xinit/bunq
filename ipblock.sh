@@ -1,5 +1,26 @@
 #!/bin/bash
 
+function add_block {
+    echo add $1
+}
+
+function rm_block {
+    echo delete $1
+}
+
+function flip_block {
+    echo flip $1
+}
+
+function list_block {    
+    echo LIST
+    echo pfctl -t blockedip -Ts
+
+}
+
+function save_block_file {    echo SAVE}
+
+
 # wrapper for pfctl add/delete. 
 
 while getopts a:d:lt: option
@@ -24,26 +45,8 @@ do
         ;;    esac
     done;
         
-function add_block {
-    echo add $1 
-}
 
-function rm_block {
-    echo delete $1    
-}
 
-function flip_block {
-    echo flip $1
-}
-
-function list_block {
-    echo LIST
-    echo pfctl -t blockedip -Ts
-}
-
-function save_block_file {
-    echo SAVE
-}
 
 
 # pfctl -t blockedip -T add 192.168.1.115
