@@ -1,16 +1,34 @@
 # bunq devops homework
 
+ASSUMPTIONS
+===========
 
-- Each loadbalance server has already been deployed to in the past, SSH authentication, etc, is already in place. Could add actions to push the authorized keys out
-- Assume that the paths all exist and that the servers are functionally identical.
+- Each loadbalance server has already been deployed to in the past, SSH keys, etc are already in place. 
 
-- git version 
+- Assume that the paths all exist and that the servers are functionally identical. 
+
+- Building to be able to push rollback version manually.  
 ansible-playbook update.yml --extra-vars "pullversion=1.2.4"
 
-stop monitoring
-remove from load balance
-stop nginx
-deploy application
+PLAN
+====
+
+1. remove a node from load balance in haproxy
+2. stop nginx on the node
+3. deploy application
+4. start nginx on the node
+
+IMPROVEMENTS
+============
+
+Improvements could add roles and tasks to 
+
+- Install new load balanced nodes outside of code update push; 
+    - push ssh authorized keys out to nodes, deploy nginx in a clean state, build local paths, etc. 
+- Stop monitoring systems
+
+
+
 
 2 a) If an nginx server doesn't load on a node, it should stay offline from the haproxy round robin and the upgrade of the remaining nodes should stop, in the event there's a larger problem. Rollback should be to a local backup in the event the git clone is part of the problem. This would assume that the nodes were all up and running pre-update code without problems.
 b) With 50 nodes, the updates could likely be done in parallel groups of 5-10 nodes at a time to speed up the deployment. Serial deployment would take a non-trivial amount of time to complete
