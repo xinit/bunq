@@ -1,4 +1,4 @@
-# bash ipblock.sh -a 1.1.1.2
+# ipblock.sh -a 1.1.1.2
  \* ADD 1.1.1.2
  
 1/1 addresses added.
@@ -6,7 +6,7 @@
  \* SAVE
 
 
-# bash ipblock.sh -l
+# ipblock.sh -l
  \* LIST
  
    1.1.1.1
@@ -18,7 +18,7 @@
    5.5.5.5
 
 
-# bash ipblock.sh -d 2.2.2.2
+# ipblock.sh -d 2.2.2.2
  \* DELETE 2.2.2.2
  
 1/1 addresses deleted.
@@ -26,7 +26,7 @@
  \* SAVE
 
 
-# bash ipblock.sh -d 5.5.5.5
+# ipblock.sh -d 5.5.5.5
  \* DELETE 5.5.5.5
  
 1/1 addresses deleted.
@@ -34,7 +34,7 @@
  \* SAVE
 
 
-# bash ipblock.sh -f 1.1.1.1
+# ipblock.sh -f 1.1.1.1
  \* DELETE 1.1.1.1
  
 1/1 addresses deleted.
@@ -42,7 +42,7 @@
  \* SAVE
 
 
-# bash ipblock.sh -a foo.ch
+# ipblock.sh -a foo.ch
  \* ADD foo.ch
  
 1/1 addresses added.
@@ -50,7 +50,7 @@
  \* SAVE
 
 
-# bash ipblock.sh -a 169.0.0.0/24
+# ipblock.sh -a 169.0.0.0/24
  \* ADD 169.0.0.0/24
  
 1/1 addresses added.
@@ -58,7 +58,7 @@
  \* SAVE
 
 
-# bash ipblock.sh -l
+# ipblock.sh -l
  \* LIST
  
    1.1.1.2
