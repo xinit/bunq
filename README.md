@@ -63,5 +63,3 @@ Perhaps splitting the application servers into multiple pools in haproxy - one f
 
 This is illustrated in the 'pf' directory. It uses a file table, and explicitly syncs the in-memory table to the conf file on any change. 
 
-
-e) 
