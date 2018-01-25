@@ -39,7 +39,7 @@
  
 1/1 addresses deleted.
 
- * SAVE
+ \* SAVE
 
 
 # bash ipblock.sh -a foo.ch
