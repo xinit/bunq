@@ -14,10 +14,8 @@ function rm_block
     }
 function flip_block
     {
-    echo flip $1
+    echo " * FLIP $1"
     ipexist=`pfctl -t blockedip -Ts | grep -i $1`
-
-    echo $ipexist
 
     # if IP not in file, add_block $1
     # if IP in file, remove $1
